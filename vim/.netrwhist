@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/home/fish/Skola/Ke/Kolväten'
+let g:netrw_dirhist_2='/home/fish/Skola/Ke'
+let g:netrw_dirhist_3='/home/fish/Skola/Ke/Kolväten'
+let g:netrw_dirhist_4='/home/fish/Projects/SFML/Collector'
+let g:netrw_dirhist_5='/home/fish/Projects/SFML/MarioTest'
+let g:netrw_dirhist_6='/home/fish/Projects'
