@@ -8,8 +8,9 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'tpope/vim-markdown'
 Plugin 'rust-lang/rust.vim'
-Plugin 'vim-syntastic/syntastic'
+Plugin 'timonv/vim-cargo'
 Plugin 'racer-rust/vim-racer'
+Plugin 'vim-syntastic/syntastic'
 Plugin 'tpope/vim-fugitive'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'pangloss/vim-javascript'
@@ -22,8 +23,6 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'xuhdev/vim-latex-live-preview'
 
 call vundle#end()
-
-set shell=/bin/bash
 
 filetype plugin indent on
 syntax on
@@ -40,6 +39,7 @@ set confirm
 set number
 set wildmenu
 set ignorecase
+set smartcase
 set nowb
 set nowrap
 set noswapfile
@@ -101,6 +101,25 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " AUTOCMDS "
 
+" Navigate with guides thanks luke my bro
+inoremap <space><tab> <esc>/<++><enter>"_c4l
+vnoremap <space><tab> <esc>/<++><enter>"_c4l
+map <space><tab> <esc>/<++><enter>"_c4l
+inoremap ;gui <++>
+
+augroup project
+	autocmd BufRead,BufNewFile *.h,*.c set filetype=c
+augroup END
+autocmd FileType c nnoremap <F4> :exec "clear"<enter>:make!<cr>
+
+autocmd FileType c nnoremap <F5> :exec "clear"<enter>:!./program<cr>
+
+"MARKDOWN -- thanks lukyboy
+
+autocmd FileType markdown,rmd map <leader>w yiWi[<esc>Ea](<esc>pa) 
+autocmd FileType markdown,rmd inoremap ;n ---<Enter><Enter>
+autocmd FileType markdown,rmd inoremap ;b ****<++><esc>02li
+
 " Create file if it doesn't exist
 autocmd BufNewFile * :write
 
@@ -110,6 +129,8 @@ autocmd BufWritePre,BufRead *.htm* :normal gg=G
 " Vim Racer
 autocmd FileType rust nnoremap <leader>gd <Plug>(rust-doc)
 
+" CSS
+autocmd FileType css nnoremap <leader>S ?{<CR>jV/^\s*\}?$<CR>k:sort<CR>:noh<CR>
 
 " AUTOCMDS - LANGS "
 
@@ -123,12 +144,13 @@ iabbrev dont don't
 iabbrev wont won't
 iabbrev im I'm
 
-" ABBREVIATIONS - Stuff "
+" ABBREVIATIONS - Misc "
 iabbrev @@ micke@mickejohansson.info
-iabbrev ccopy Copyright 2017 Michael Johansson, all rights reserved.
+iabbrev ccopy Copyright 2018 Michael Johansson, all rights reserved.
 iabbrev nnr nnoremap
 iabbrev inr inoremap
 iabbrev vnr vnoremap
+
 " to get rid of the nnoremap habit
 iabbrev nnoremap - 
 iabbrev inoremap - 
